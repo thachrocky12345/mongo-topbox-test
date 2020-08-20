@@ -49,7 +49,8 @@ def interactions():
 
     interaction_start_date = request.args.get("startDate")
     interaction_end_date = request.args.get("endDate")
-    conditions = {"$and": [{"engagementId": engagement_object_id}]
+    conditions = {
+        "$and": [{"engagementId": engagement_object_id}]
     }
 
     if interaction_start_date:
@@ -60,10 +61,7 @@ def interactions():
         conditions["$and"].append({'interactionDate': {'$lte': end_date}})
 
     ret_data = db.interactions.find(conditions)
-
     return json_util.dumps(ret_data)
-
-
 
 @app.route('/interactions/<interaction_id>')
 def interactions_by_id(interaction_id):
